@@ -1,44 +1,126 @@
-# Runtime QA
+# Runtime QA — English v1.0 Final
 
-## Public evidence
+This document records the runtime validation status of the final public English release of **Xenosaga I+II for Nintendo DS**.
 
-Gameplay video:
+## Final runtime status
 
-**Xenosaga I+II DS in English – Full-Game Rough Translation RC1 Gameplay**  
-https://youtu.be/WXCLkwqY2JU
+`BOOT_TEST = PASS`
 
-## Confirmed by user testing
+`TITLE_MENU_TEST = PASS`
 
-- `BOOT_TEST = PASS`
-- `EARLY_DIALOGUE_TEST = PASS`
-- `OPENING_YES_NO_CHOICE = PASS`
-- `YES_BRANCH_RUNTIME_FIX = PASS`
-- `NO_BRANCH_RUNTIME_TEST = PASS`
-- `OPENING_WORD_WRAP_FIX = PASS`
-- `POST_CHOICE_ENGLISH_GAMEPLAY = PASS`
+`NEW_GAME_TEST = PASS`
 
-The original `Yes` freeze was traced to stale absolute branch targets in variable-length translated EVC files. Runtime Fix 1 relocates supported branch operands and the user confirmed that the previously freezing tutorial route now continues.
+`OPENING_DIALOGUE_TEST = PASS`
 
-## Confirmed issues from runtime
+`OPENING_YES_TUTORIAL_ROUTE = PASS`
 
-- `MAIL_NOTIFICATION_VISIBLE_JAPANESE = PRESENT`
-- `LOWER_SCREEN_FONT_READABILITY = ROUGH`
-- `BATTLE_SCENE_REACHED = YES`
-- `BATTLE_ATTACK_COMMAND_SMOKE_TEST = NOT_YET_CONFIRMED`
-- `FULL_PLAYTHROUGH_VALIDATION = NOT_YET_COMPLETE`
+`TUTORIAL_REFRESHER_TEST = PASS`
 
-## Still needed
+`FIRST_BATTLE_TEST = PASS`
 
-- Focused mail/notification text-source audit
-- Lower-screen font readability cleanup
-- Main menu / Status / Items / Options / Save-Load sweep
-- Battle attack/command smoke test with a comfortable DS-style controller mapping
-- Additional choice-heavy scenes
-- At least one late-game translated event
-- Full playthrough
+`BATTLE_P_E_DISPLAY = PASS`
 
-## Bug categories
+`CHAPTER_TITLE_PRESENTATION = PASS`
 
-When reporting a defect, use one of:
+`TEXT_WRAP_READABILITY = PASS`
 
-`FONT_GLYPH`, `FONT_WIDTH`, `TEXT_OVERFLOW`, `LINE_WRAP`, `CHOICE_TEXT`, `BRANCH_FREEZE`, `MAIL_NOTIFICATION`, `UNTRANSLATED_UI`, `MENU_LAYOUT`, `GRAPHIC_LABEL`, `PALETTE`, `TILEMAP`, `CONTROL_CODE`, `EVC_RENDER`, `EXECUTABLE_UI`, `DATABASE_UI`, `BATTLE_UI`, `CRASH`, `UNKNOWN`.
+## Tested route
+
+The final v1.0 candidate was user-tested through:
+
+- cold boot
+- title/menu
+- New Game
+- opening dialogue
+- YES warm-up/tutorial route
+- tutorial/refresher progression
+- first battle
+- battle type glyph display
+- chapter/title presentation
+- general dialogue wrapping and readability
+
+No known visible blocker remained in this tested coverage.
+
+## Previously fixed runtime defects
+
+### Opening YES tutorial freeze
+
+Earlier builds could freeze after choosing **Yes** for the opening warm-up/tutorial.
+
+The issue was traced to stale absolute EVC branch targets after variable-length English text changed event byte offsets.
+
+The supported branch targets were relocated correctly, and the repaired route was runtime-tested successfully.
+
+`YES_BRANCH_RUNTIME_FIX = PASS`
+
+### Dialogue wrapping
+
+Earlier builds could produce awkward inside-word wrapping and isolated fragments.
+
+A whole-game dialogue reflow/wrapping pass was completed before v1.0.
+
+`WHOLE_GAME_WRAP_CLEANUP = PASS`
+
+### Chapter/title graphics
+
+Earlier technical candidates contained corrupted chapter/title graphics.
+
+The final title-card graphics were rebuilt using the corrected safe compression path and runtime-tested successfully.
+
+`CHAPTER_TITLE_GRAPHICS = PASS`
+
+### Battle type display
+
+The final battle UI displays:
+
+- `P` = Physical
+- `E` = Ether
+
+`BATTLE_TYPE_GLYPHS = PASS`
+
+## Static verification accompanying runtime QA
+
+The final build also passed the relevant static audits:
+
+- normal player-facing EVC Japanese remaining: **0**
+- KJM/title Japanese remaining: **0**
+- deep player-facing EVC Japanese remaining: **0**
+- BDY Japanese runs remaining: **0**
+- item-description Japanese remaining: **0**
+- BPS reapplication reproduced the final ROM byte-for-byte
+
+## Intentional non-player-facing residue
+
+Thirteen Japanese `0x4D` fields remain intentionally because they were classified as internal/SFX-style cues rather than normal player-facing text.
+
+Japanese developer/configuration comments also remain in:
+
+- `0/param00.txt`
+- `0/param01.txt`
+- `0/param02.txt`
+
+These are not normal player-facing game text.
+
+## QA scope
+
+The final release has real runtime testing and extensive static verification.
+
+This does **not** claim an exhaustive every-state or full start-to-finish certification of the complete game.
+
+The correct public description is:
+
+**No known visible issues in tested coverage. Runtime-tested through the opening YES tutorial path and first battle.**
+
+## Final hashes
+
+Clean Japanese source SHA-256:
+
+`938d07521cfc937d179402e85c8b0b43f3e929a494838ff1455b29126b56d356`
+
+Final English v1.0 BPS SHA-256:
+
+`d0188e2abf13ba81496ec0e387ad3eba3180c7b65af61c2a0dbac96efa71919e`
+
+Expected patched ROM SHA-256:
+
+`5cfe164aea57174ad47801e90f7fd53dccca4d30db2680991d54ec232aac4a61`
