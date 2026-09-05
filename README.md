@@ -1,88 +1,125 @@
-# Xenosaga I+II DS — Rough English v0.1 RC1
+# Xenosaga I+II DS — Complete English Translation v1.0
 
-**Status: Public QA release candidate. This is not a polished final localization.**
+**Status: FINAL PUBLIC RELEASE**
 
-This project is an independently produced rough-English localization of the Nintendo DS version of **Xenosaga I+II**. The priority of this RC1 is broad English readability, reproducible patching, and real runtime testing. Literary editing, final graphics/font cleanup, and full-playthrough certification come later.
+This project is a complete English fan localization of **Xenosaga I+II for Nintendo DS**.
 
-## 🎥 Runtime gameplay video
+The earlier `v0.1-rc1` release served as the public QA baseline. The project has since undergone additional translation completion, graphics reconstruction, text reflow, database localization, residue auditing and runtime testing.
 
-**Xenosaga I+II DS in English – Full-Game Rough Translation RC1 Gameplay**  
-https://youtu.be/WXCLkwqY2JU
+## Download
 
-The video shows the current RC1 running in real gameplay with English dialogue, choices, menus/status screens and battle footage. It is public runtime evidence for the build, not a claim of completed full-game QA.
+### Latest release
 
-## Current verified state
+**Xenosaga I+II DS – Complete English Translation v1.0**
 
-- Core/story machine-readable text: **complete rough English**
-- Supported visible EVC Japanese remaining: **0**
-- EVC choice menus: **1,286 Japanese options found; 0 remaining in the supported choice layer**
-- EVC branch relocation: **1,304 targets relocated; 0 unresolved**
-- Boot to gameplay: **PASS, user tested**
-- Early English dialogue: **PASS, user tested**
-- Opening `Yes / No` choice: **PASS, user tested**
-- Previously freezing `Yes` tutorial branch: **PASS, user tested after relocation fix**
-- `No` branch: **PASS, user tested**
-- Opening dialogue word-wrap fix: **PASS, user tested**
-- Battle scene: **reached and shown, controls/attack behavior not yet formally certified**
-- Full playthrough validation: **not yet complete**
+https://github.com/vw5hwbngy4-debug/Xenosaga-I-II-DS-English/releases/tag/v1.0
 
-## Known visible issues
+The release contains:
 
-This RC1 is playable for public QA, but it is not visually clean everywhere:
+- `Xenosaga_I_II_DS_English_v1.0.bps`
+- release documentation
+- hashes and technical records
 
-- Some Japanese UI/notification text can still appear. A confirmed example is the incoming-mail notification layer.
-- Some English text on the lower screen is difficult to read because the current font/graphics treatment is still rough.
-- Battle controls have not yet received a formal smoke-test certification.
-- Other late-game UI or graphical-text residue may still surface during wider testing.
+No Nintendo DS ROM is distributed.
 
-These issues are **not currently known to block progression**, but a full end-to-end playthrough has not yet been certified.
+## Official website
 
-See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and [RUNTIME_TESTING.md](RUNTIME_TESTING.md).
+https://xenosaga.wolken.page/
 
-## Runtime Fix 1
+The website includes a local browser patcher.
 
-The first real playtest exposed two major defects:
+Dutch localization:
 
-1. Some English dialogue wrapped inside words and produced isolated one-letter lines.
-2. Choosing **Yes** at `Do you want to warm up before the mission?` froze the game.
+https://xenosaga-nederlands.wolken.page/
 
-The wrapping defect is now handled with conservative word-boundary fitting using a 36-character fallback for the current dialogue path.
+## Final v1.0 status
 
-The freeze was traced to stale absolute EVC branch offsets after variable-length English text shifted later event bytecode. The serializer now relocates supported `0x26` and `0x27` branch targets. The separate EVC choice structure was also identified and translated globally.
+### Translation
 
-The user retested the previously freezing **Yes** route and confirmed it now continues normally.
+- Normal player-facing EVC Japanese remaining: **0**
+- KJM / title Japanese remaining: **0**
+- Deep player-facing EVC Japanese remaining: **0**
+- BDY Japanese runs: **0**
+- Item-description Japanese remaining: **0**
+- Choice layer translated
+- Chapter/title cards translated
+- Battle UI localized
+- Item descriptions translated
+- Whole-game dialogue wrap cleanup completed
 
-See `reports/runtime_fix1/runtime_fix1_summary.json` for machine-readable evidence.
+Thirteen Japanese `0x4D` fields remain intentionally because they are internal/SFX-style cues rather than normal player-facing text.
 
-## Patch
+Japanese comments also remain in:
 
-The patch itself is shipped as a GitHub Release asset rather than a ROM image:
+- `0/param00.txt`
+- `0/param01.txt`
+- `0/param02.txt`
 
-`xenosaga_i_ii_ds_rough_english_v0.1-rc1.bps`
+These are developer/configuration comments and are not normal player-facing game text.
 
-See [PATCHING.md](PATCHING.md).
+## Runtime QA
 
-## What “RC1” means here
+Final v1.0 was tested successfully through:
 
-RC1 means this rough-English build is ready for wider runtime QA. It does **not** mean:
+- cold boot
+- New Game
+- opening dialogue
+- YES warm-up/tutorial route
+- tutorial/refresher progression
+- first battle
+- chapter/title presentation
+- battle type display
+- general text wrapping/readability
 
-- final literary editing;
-- zero Japanese pixels on every screen;
-- perfect lower-screen typography;
-- complete battle-system QA;
-- full-game playthrough certification;
-- final graphics provenance cleanup.
+The battle UI now displays:
 
-Please report freezes, unreadable text, untranslated UI, battle/control problems, or late-game regressions with screenshots or short video clips. See [CONTRIBUTING.md](CONTRIBUTING.md).
+- `P` = Physical
+- `E` = Ether
 
-## Graphics / font provenance note
+No known visible blocker remains in the tested coverage.
 
-The current user-tested build contains an engineering graphics/font pass reconstructed through Japanese-versus-Vector-beta differential analysis. Vector was used as technical/layout evidence. This graphics layer is still marked as reference-derived engineering output and is scheduled for a stricter independent raster/tile rebuild before a provenance-clean final release.
+This is **not** a claim of exhaustive every-state or full-game certification.
 
-The translation corpus and EVC runtime fixes are not intended to copy Vector's English prose.
+## Major fixes since RC1
 
-See [GRAPHICS_PROVENANCE.md](GRAPHICS_PROVENANCE.md) and [LICENSES_AND_PROVENANCE.md](LICENSES_AND_PROVENANCE.md).
+The final release includes fixes and improvements beyond the original public RC1, including:
+
+- opening YES tutorial freeze fix
+- branch relocation fixes
+- whole-game dialogue reflow
+- deep EVC translation completion
+- chapter/title-card graphics reconstruction
+- safe graphics compression
+- battle P/E sprite glyph replacement
+- item database completion
+- player-facing Japanese residue cleanup
+- final text polish
+- reproducible BPS build verification
+
+## Required source ROM
+
+Clean Japanese **Xenosaga I+II** Nintendo DS ROM.
+
+SHA-256:
+
+`938d07521cfc937d179402e85c8b0b43f3e929a494838ff1455b29126b56d356`
+
+## Final BPS SHA-256
+
+`d0188e2abf13ba81496ec0e387ad3eba3180c7b65af61c2a0dbac96efa71919e`
+
+## Expected patched ROM SHA-256
+
+`5cfe164aea57174ad47801e90f7fd53dccca4d30db2680991d54ec232aac4a61`
+
+## Historical releases
+
+`v0.1-rc1` remains available as the historical public QA release.
+
+It is superseded by **v1.0 Final** and should not be used for a new installation.
 
 ## ROM policy
 
-No Nintendo DS ROM is included or distributed. You must supply your own legally obtained clean Japanese ROM matching the SHA-256 in `SOURCE_ROM_HASHES.txt`.
+No original or patched commercial ROM is included or distributed.
+
+Users must supply their own supported Japanese copy and apply the BPS patch locally.
