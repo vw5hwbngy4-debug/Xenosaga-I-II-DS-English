@@ -1,43 +1,80 @@
-# Xenosaga I+II DS Rough English v0.1 RC1
+# Xenosaga I+II DS — Complete English Translation v1.0
 
-This is a **Public QA release candidate** of a broad rough-English localization. It prioritizes readable English coverage and runtime functionality over polished prose and perfect graphics.
+This is the final public English localization release of **Xenosaga I+II for Nintendo DS**.
 
-## Runtime video
+The earlier `v0.1-rc1` release was a public QA build. Since then, the project has received additional translation completion, deep-script cleanup, graphics reconstruction, item/database localization, text reflow, residue auditing and runtime testing.
 
-**Xenosaga I+II DS in English – Full-Game Rough Translation RC1 Gameplay**  
-https://youtu.be/WXCLkwqY2JU
+## Final release
 
-## Highlights
+GitHub release:
 
-- Complete supported machine-readable rough-English text layer.
-- Opening gameplay booted and tested successfully.
-- Identified and translated the separate Japanese choice layer globally: 1,286 choice options across 459 choice blocks.
-- Fixed the opening **Yes** tutorial hard freeze by relocating absolute EVC branch targets after variable-length translation.
-- 1,304 branch targets relocated; 0 unresolved in the current static audit.
-- Fixed observed one-letter/inside-word line wrapping with a 36-character word-boundary fallback.
-- User confirmed both **Yes** and **No** opening paths continue normally.
-- Continued English gameplay has been captured publicly on video.
+https://github.com/vw5hwbngy4-debug/Xenosaga-I-II-DS-English/releases/tag/v1.0
 
-## Known issues
+Official website:
 
-- Some Japanese UI/notification text still appears. A confirmed example is the incoming-mail notification layer.
-- Some lower-screen English font/UI text is difficult to read.
-- Battle scenes are reached, but attack/command controls are not yet formally smoke-test certified.
-- Late-game QA and full start-to-finish playthrough validation are still incomplete.
-- The current graphics/font pass is still marked as reference-derived engineering output pending a stricter independent rebuild.
+https://xenosaga.wolken.page/
 
-These known issues are not currently known to block progression, but this RC1 should be treated as a public testing build rather than a final localization.
+## Final v1.0 highlights
+
+- Complete supported English story/dialogue coverage
+- 1,286 translated choice options
+- Opening YES tutorial freeze fixed
+- EVC branch relocation fixes integrated
+- Whole-game dialogue wrap cleanup
+- Deep player-facing EVC translation completed
+- Chapter/title-card graphics rebuilt in English
+- Battle type glyphs localized to `P` and `E`
+- Item descriptions translated
+- Player-facing Japanese residue removed from the audited supported layers
+- BPS reapply verified byte-identical
+
+## Final residue audit
+
+- Normal player-facing EVC Japanese: **0**
+- KJM/title Japanese: **0**
+- Deep player-facing EVC Japanese: **0**
+- BDY Japanese runs: **0**
+- Item-description Japanese: **0**
+
+Thirteen Japanese `0x4D` fields remain intentionally because they are internal/SFX-style cues rather than normal player-facing text.
+
+Japanese developer/configuration comments also remain in:
+
+- `0/param00.txt`
+- `0/param01.txt`
+- `0/param02.txt`
+
+These are not normal player-facing game text.
+
+## Runtime QA
+
+Final v1.0 was user-tested successfully through:
+
+- cold boot
+- title/menu
+- New Game
+- opening dialogue
+- YES warm-up/tutorial route
+- tutorial/refresher
+- first battle
+- chapter/title presentation
+- battle P/E glyphs
+- text wrapping/readability
+
+No known visible issue remained in the tested coverage.
+
+This release does **not** claim an exhaustive every-state or full-game certification.
 
 ## Required clean source SHA-256
 
 `938d07521cfc937d179402e85c8b0b43f3e929a494838ff1455b29126b56d356`
 
-## Patch SHA-256
+## Final BPS SHA-256
 
-`8864d3e9035b92c55148da9870b531f4387defa8153b3d274fbac3469acad464`
+`d0188e2abf13ba81496ec0e387ad3eba3180c7b65af61c2a0dbac96efa71919e`
 
 ## Expected patched ROM SHA-256
 
-`67c0fe831083ccfe2da21768fecafd31fb68b7e809964157d175147b3f3f1db1`
+`5cfe164aea57174ad47801e90f7fd53dccca4d30db2680991d54ec232aac4a61`
 
-No ROM image is included.
+No ROM image is included or distributed.
