@@ -1,43 +1,72 @@
-# Known issues / open QA
+# Known Issues — English v1.0 Final
 
-## 1. Japanese mail / notification UI can still appear
+This document records the known-issue status for the final public English release of **Xenosaga I+II for Nintendo DS**.
 
-A runtime test confirmed that some Japanese text may still appear when receiving mail. The underlying translated content systems can be English while this separate notification/UI layer remains Japanese.
+## Current status
 
-This is a **confirmed visible-Japanese residue** and should not be hidden behind a blanket “zero visible Japanese everywhere” claim.
+There are **no known visible blockers in the tested v1.0 coverage**.
 
-Current impact: **not known to block progression**.
+The final build was runtime-tested through:
 
-## 2. Lower-screen English font can be difficult to read
+- cold boot
+- title/menu
+- New Game
+- opening dialogue
+- YES warm-up/tutorial route
+- tutorial/refresher
+- first battle
+- battle P/E display
+- chapter/title presentation
+- general text wrapping/readability
 
-Some English text on the lower screen is functional but visually hard to read. Font/graphics cleanup is still planned.
+The previously reported RC1 issues involving visible Japanese UI residue, rough lower-screen readability, uncertified battle behavior and incomplete graphics cleanup were addressed during the v1.0 work and should not be treated as current known issues.
 
-Current impact: **readability/polish issue, not currently known to block progression**.
+## Important QA scope
 
-## 3. Battle controls / attack flow are not yet formally certified
+This release has substantial static verification and real runtime testing.
 
-The game reaches battle and battle footage exists, but the tester found the keyboard control mapping confusing and did not formally certify attack/command behavior.
+It does **not** claim exhaustive certification of every optional event, every menu state, every save/load path, every late-game branch or a complete start-to-finish playthrough.
 
-Current impact: **QA incomplete**, not a confirmed game logic failure.
+The correct interpretation is:
 
-## 4. Full playthrough validation is not complete
+**No known visible issues in tested coverage.**
 
-The opening and early runtime paths have real user confirmation, but the complete game has not yet been validated from start to finish. Additional late-game choice, event, UI, battle, save/load, and graphical-text defects may still surface.
+## Intentional non-player-facing Japanese
 
-## 5. Typography remains rough
+Thirteen Japanese `0x4D` fields remain intentionally because they were classified as internal/SFX-style cues rather than normal player-facing text.
 
-Runtime Fix 1 fixes the observed one-letter/inside-word wrapping regressions using a conservative 36-character word-boundary fallback. Other textbox types may require different pixel-width fitting rules.
+Japanese developer/configuration comments also remain in:
 
-## 6. Graphics/font provenance is not final
+- `0/param00.txt`
+- `0/param01.txt`
+- `0/param02.txt`
 
-The current tested graphical pass is reference-derived engineering output based on Japanese-versus-Vector-beta differential analysis. A stricter independent raster/tile rebuild is still planned before calling the graphics layer provenance-clean.
+These are not normal player-facing localization residue.
+
+## Historical RC1 issues
+
+The following issues were associated with the earlier `v0.1-rc1` QA build and are no longer current v1.0 known issues:
+
+- visible Japanese mail/notification text
+- rough lower-screen font/readability
+- opening YES tutorial freeze
+- incomplete battle command QA
+- rough chapter/title graphics
+- dialogue wrapping defects
+- incomplete deep-script translation
+- incomplete item-description localization
 
 ## Reporting bugs
 
-If you find a freeze, untranslated UI, unreadable font, or broken battle/menu behavior, include:
+If you find a reproducible issue in v1.0, please include:
 
-- exact scene/menu;
-- emulator or real hardware setup;
-- inputs immediately before the issue;
-- screenshot or short video if possible;
-- whether restarting reproduces it.
+- exact scene/menu
+- emulator or hardware used
+- inputs immediately before the issue
+- screenshot or short video if possible
+- whether restarting reproduces it
+- whether the issue occurs on a clean v1.0 patch application
+
+Useful bug categories include:
+
+`FONT_GLYPH`, `FONT_WIDTH`, `TEXT_OVERFLOW`, `LINE_WRAP`, `CHOICE_TEXT`, `BRANCH_FREEZE`, `UNTRANSLATED_UI`, `MENU_LAYOUT`, `GRAPHIC_LABEL`, `PALETTE`, `TILEMAP`, `CONTROL_CODE`, `EVC_RENDER`, `EXECUTABLE_UI`, `DATABASE_UI`, `BATTLE_UI`, `CRASH`, `UNKNOWN`
