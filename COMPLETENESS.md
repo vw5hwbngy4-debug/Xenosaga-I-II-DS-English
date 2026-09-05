@@ -1,50 +1,111 @@
-# Completeness
+# Completeness — English v1.0 Final
 
-This project separates **text-corpus completeness**, **visible UI/graphics completeness**, and **runtime/playthrough validation**. They are not the same gate.
+This document records the completion status of the final public English localization of **Xenosaga I+II for Nintendo DS**.
 
-## Passed / machine verified
+## Final status
 
-- Whole supported rough-English machine-readable text layer
-- 29,461 supported visible EVC records translated in the text-complete checkpoint
-- EVC `0x86` Japanese residue: 0 in the current supported build
-- EVC choice layer discovered and rebuilt
-- 459 choice blocks / 1,286 Japanese choice options handled
-- 1,304 EVC branch targets relocated
-- Branch pointer unresolved count: 0
-- Naive post-build Japanese `0x02` / `0x86` residue in Runtime Fix 1: 0 / 0
-- Max fallback dialogue line length: 36 display characters
-- One-letter emitted lines: 0
-- NitroFS/FAT/header validation: PASS
-- BPS reapply byte-identical: PASS
+`ENGLISH_V1_FINAL = PASS`
 
-## Passed / user runtime tested
+`SUPPORTED_PLAYER_FACING_TEXT_COMPLETE = PASS`
 
-- Boot to gameplay
-- Early English dialogue rendering
-- English speaker labels visible in opening scene
-- `Yes / No` opening choice
-- `Yes` tutorial/Target Drone branch no longer freezes
-- `No` branch continues normally
-- Opening word-wrap regression fixed
-- Continued English gameplay after the opening choice
+`BPS_ROUNDTRIP = PASS`
 
-Public runtime video:
+The final release supersedes the earlier `v0.1-rc1` public QA build.
 
-https://youtu.be/WXCLkwqY2JU
+## Translation coverage
 
-## Confirmed residual / incomplete layers
+### EVC / dialogue
 
-- Some Japanese mail/notification UI remains visible in runtime
-- Lower-screen English font readability is rough
-- Battle scene is reached, but attack/command control behavior is not yet formally certified
-- Full menu/status/battle visual sweep is incomplete
-- Late-game runtime proof on the current RC1 is incomplete
-- Full playthrough validation is incomplete
-- Final independent graphics/font provenance rebuild is incomplete
-- Literary editing/polish is incomplete
+- Supported EVC translatable records: **29,461**
+- Normal player-facing EVC Japanese remaining: **0**
+- Deep player-facing EVC Japanese remaining: **0**
+- KJM/title Japanese remaining: **0**
 
-## Current interpretation
+### Choices
 
-`WHOLE_TEXT_ROUGH_COMPLETE = PASS` refers to the supported machine-readable text corpus and rebuilt text systems.
+- Choice options translated: **1,286**
+- Supported choice-layer Japanese remaining: **0**
 
-It does **not** mean that every graphical/UI pixel in the ROM is English. Runtime QA has now confirmed at least one remaining Japanese notification/UI layer.
+### Database / other text
+
+- Item descriptions translated
+- Item-description Japanese remaining: **0**
+- BDY Japanese runs remaining: **0**
+- Speaker labels and supported runtime text integrated
+
+## Graphics and UI
+
+Final v1.0 includes:
+
+- English chapter/title cards
+- reconstructed title graphics
+- battle type glyph localization
+- `P` = Physical
+- `E` = Ether
+- title/menu/options/status fixes
+- graphics residue cleanup in the audited player-facing targets
+
+The chapter/title graphics use the corrected safe compression path and were runtime-tested in the final candidate.
+
+## Text layout
+
+The final build includes a whole-game dialogue wrapping/reflow pass.
+
+The earlier RC1 wrapping defects, including inside-word breaks and isolated fragments observed during runtime testing, were addressed before v1.0.
+
+## Runtime-tested coverage
+
+Final v1.0 was user-tested successfully through:
+
+- cold boot
+- title/menu
+- New Game
+- opening dialogue
+- YES warm-up/tutorial route
+- tutorial/refresher
+- first battle
+- battle P/E display
+- chapter/title presentation
+- general text wrapping/readability
+
+No known visible blocker remained in this tested coverage.
+
+## Intentional non-player-facing Japanese
+
+Thirteen Japanese `0x4D` fields remain intentionally.
+
+These were classified as internal/SFX-style cues rather than normal player-facing dialogue.
+
+Japanese developer/configuration comments also remain in:
+
+- `0/param00.txt`
+- `0/param01.txt`
+- `0/param02.txt`
+
+These are not normal player-facing game text and are not localization residue presented to the player.
+
+## Verification
+
+Final BPS reapplication to the clean Japanese source reproduced the final English ROM byte-for-byte.
+
+Clean Japanese source SHA-256:
+
+`938d07521cfc937d179402e85c8b0b43f3e929a494838ff1455b29126b56d356`
+
+Final English v1.0 BPS SHA-256:
+
+`d0188e2abf13ba81496ec0e387ad3eba3180c7b65af61c2a0dbac96efa71919e`
+
+Expected patched ROM SHA-256:
+
+`5cfe164aea57174ad47801e90f7fd53dccca4d30db2680991d54ec232aac4a61`
+
+## QA scope
+
+The final release has substantial static verification and real runtime testing.
+
+It should not be interpreted as a formal exhaustive certification of every possible game state, optional path, save state, menu combination or full start-to-finish playthrough.
+
+The appropriate public description is:
+
+**No known visible issues in tested coverage. Runtime-tested through the opening YES tutorial path and first battle.**
